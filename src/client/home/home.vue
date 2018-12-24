@@ -21,8 +21,4 @@ export default {
 }
 </script>
 <style scoped lang="stylus">
-    .home
-        width:100%;
-        line-height:20px;
-        background: green;
 </style>

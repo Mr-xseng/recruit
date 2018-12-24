@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-    <Header/>
-    <router-view/>
-    <Footer/>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
   </div>
 </template>
 <script>
-import Header from './client/public/header/index'
-import Footer from './client/public/footer/index'
 export default {
     components: {
-        Header,
-        Footer
     }
 }
 </script>
 <style lang="stylus">
+  #app{
+    width:100%;
+    height:100%;
+  }
 </style>

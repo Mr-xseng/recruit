@@ -18,8 +18,8 @@ export default new Router({
             component: () => import('../client/login/login.vue')
         },
         {
-            path: '/singup',
-            component: () => import('../client/singup/singup')
+            path: '/register',
+            component: () => import('../client/register/register.vue')
         },
         {
             path: '/detail/:id',

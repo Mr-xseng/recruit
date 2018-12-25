@@ -1,19 +1,23 @@
 <template>
   <div id="app">
-    <keep-alive>
-      <router-view/>
-    </keep-alive>
+    <img src="./assets/logo.png">
+    <router-view/>
   </div>
 </template>
+
 <script>
 export default {
-    components: {
-    }
+  name: 'App'
 }
 </script>
-<style lang="stylus">
-  #app{
-    width:100%;
-    height:100%;
-  }
+
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
 </style>

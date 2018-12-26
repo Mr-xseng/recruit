@@ -3,7 +3,7 @@
     <div class="section">
       <div class="title">欢迎注册</div>
       <el-form
-        ref="ruleForm"
+        ref="registerForm"
         :model="ruleForm"
         :rules="rules"
         label-width="100px"
@@ -22,7 +22,7 @@
           label="手机号"
           prop="phoneNum"
         >
-          <el-input v-model="ruleForm.phoneNum"/>
+          <el-input type="text" v-model.number="ruleForm.phoneNum"/>
         </el-form-item>
         <el-form-item
           class="codeForm"
@@ -58,95 +58,112 @@
             type="password" />
         </el-form-item>
         <el-form-item class="registerBtn">
-          <el-button
+          <button
             @click="register()"
-            type="primary"
-          >注册</el-button>
+            class="registerName"
+          >注册</button>
           <div class="error">{{ error }}</div>
         </el-form-item>
       </el-form>
+      <div class="register-info">
+        <p class="register-content">点击注册按钮即为您同意 用户协议及隐私政策</p>
+        <div class="register-login">
+          <em>已有账号</em>
+          <router-link to="/login" class="loginSty">直接登录</router-link></div>
+      </div>
     </div>
   </div>
 </template>
 <script>
-export default{
+export default {
   data () {
-    var namePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入昵称'))
-        this.nameFlag = false
+    var namePass = async (rule, value, callback) => {
+      if (/\s+/g.test(value)) {
+        callback(new Error('禁用空格字符'))
       } else {
-        this.nameFlag = true
-      }
-    }
-    var codePass = (rule, value, callback) => {
-      if (value === '') {
-        this.nameFlag = false
-        callback(new Error('验证码为空'))
-      } else if (value !== this.currentCode) {
-        this.nameFlag = false
-        callback(new Error('验证码错误'))
-      } else {
-        this.codeFlag = true
-        callback()
-      }
-    }
-    var cpwdPass = (rule, value, callback) => {
-      if (value === '') {
-        this.nameFlag = false
-        callback(new Error('请再次输入密码'))
-      } else if (value !== this.ruleForm.pwd) {
-        this.nameFlag = false
-        callback(new Error('两次密码不一致'))
-      } else {
-        callback()
-        this.pwdFlag = true
-      }
-    }
-    var phonePass = (rule, value, callback) => {
-      this.phoneFlag = true
-      if (value === '') {
-        this.nameFlag = false
-        callback(new Error('手机号为空'))
-      }
-      let phoneArr = value.split('')
-      if (phoneArr.length !== 11) {
-        this.nameFlag = false
-        callback(new Error('手机号格式错误'))
-      }
-      for (var i = 0; i < phoneArr.length; i++) {
-        if (isNaN(phoneArr[i])) {
-          this.nameFlag = false
-          callback(new Error('手机号格式错误'))
+        var params = new URLSearchParams()
+        params.append('username', value)
+        let {status: status1, data: {status}} = await this.$axios({
+          method: 'post',
+          url: '/checkUsername',
+          data: params
+        })
+        if (status1 === 200 && status === 200) {
+          callback()
         }
       }
     }
-    var pwdPass = (rule, value, callback) => {
-      if (value === '') {
-        this.nameFlag = false
-        callback(new Error('请再次输入密码'))
+    var codePass = (rule, value, callback) => {
+      if (value !== this.currentCode) {
+        callback(new Error('验证码错误'))
       } else {
-        this.cpwdFlag = true
+        callback()
       }
     }
-    var emailPass = (rule, value, callback) => {
-      if (value === '') {
-        this.emailFlag = false
-        callback(new Error('请再次输入邮箱'))
+    var pwdPass = (rule, value, callback) => {
+      const pwdReg = /^[0-9a-zA-Z]+$/
+      if (pwdReg.test(value)) {
+        callback()
       } else {
-        this.emailFlag = true
+        callback(new Error('密码设置格式为数字和字母组合'))
+      }
+    }
+    var cpwdPass = (rule, value, callback) => {
+      if (value !== this.ruleForm.pwd) {
+        callback(new Error('两次密码不一致'))
+      } else {
+        callback()
+      }
+    }
+    var phonePass = async (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('手机号不能为空'))
+      } else {
+        const reg = /^1[3|4|5|7|8][0-9]\d{8}$/
+        console.log(reg.test(value))
+        if (reg.test(value)) {
+          var params = new URLSearchParams()
+          params.append('telephone', value)
+          let {status: status1, data: {status}} = await this.$axios({
+            method: 'post',
+            url: '/checkTelephone',
+            data: params
+          })
+          if (status1 === 200 && status === 200) {
+            callback()
+          }
+        } else {
+          return callback(new Error('请输入正确的手机号'))
+        }
+      }
+    }
+    var emailPass = async (rule, value, callback) => {
+      const emailReg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/
+      const comReg = /163|qq/
+      if (comReg.test(value)) {
+        if (!/.com$/.test(value)) {
+          callback(new Error('邮箱格式有误'))
+        }
+      }
+      if (emailReg.test(value)) {
+        var params = new URLSearchParams()
+        params.append('email', value)
+        let {status: status1, data: {status}} = await this.$axios({
+          method: 'post',
+          url: '/checkEmail',
+          data: params
+        })
+        if (status1 === 200 && status === 200) {
+          callback()
+        }
+      } else {
+        callback(new Error('邮箱格式有误'))
       }
     }
     return {
       currentCode: '',
       statusMsg: '',
       error: '',
-      nameFlag: false,
-      phoneFlag: false,
-      codeFlag: false,
-      pwdFlag: false,
-      cpwdFlag: false,
-      emailFlag: false,
       ruleForm: {
         name: '',
         phoneNum: '',
@@ -164,8 +181,8 @@ export default{
         }, {validator: namePass, trigger: 'blur'}],
         email: [{
           required: true,
-          type: 'email',
           message: '邮箱为空或无效',
+          type: 'email',
           trigger: 'blur'
         }, {validator: emailPass, trigger: 'blur'}],
         phoneNum: [{
@@ -196,14 +213,23 @@ export default{
   },
   methods: {
     register () {
-      // if (this.nameFlag&&this.emailFlag&&this.pwdFlag&&this.cpwdFlag&&this.phoneFlag&&this.codeFlag){
-      //     alert('pass')
-      //     console.log(this.nameFlag,this.emailFlag,this.pwdFlag,this.cpwdFlag)
-      // } else {
-      //     alert('no passing')
-      // }
-      this.$refs['ruleForm'].validate(function (valid) {
-        console.log(valid, 'op')
+      let self = this
+      this.$refs['registerForm'].validate(async (valid) => {
+        if (valid) {
+          var params = new URLSearchParams()
+          params.append('username', this.ruleForm.name)
+          params.append('telephone', this.ruleForm.phoneNum)
+          params.append('email', this.ruleForm.email)
+          params.append('password', this.ruleForm.pwd)
+          let {status: status1, data: {status}} = await self.$axios({
+            method: 'post',
+            url: '/register',
+            data: params
+          })
+          if (status1 === 200 && status === 200) {
+            self.$router.push('/active')
+          }
+        }
       })
     },
     createCode () {
@@ -223,7 +249,7 @@ export default{
 </script>
 <style scoped lang="stylus">
   .register
-    background-image: url("./recruit_register.png");
+    background-image: url("~assets/style/img/recruit_register.png");
     position: fixed;
     top:0;
     left:0;
@@ -235,13 +261,23 @@ export default{
     height: 100%;
     .section
       width: 28%;
-      height:85%;
+      height:90%;
       margin:50px auto;
       padding-top:30px;
       box-sizing: border-box;
       background :#fff;
       border-radius 8px;
       box-shadow :1px 2px 20px rgba(0,0,0,.3);
+      .register-info
+        text-align center
+        font-size:13px;
+        color: #b8d3ff;
+        .register-login
+          margin-top 10px;
+          .loginSty
+            margin-left: 3px;
+            color:#18c3b1;
+            text-decoration:none;
       .demo-ruleForm
         padding-right:50px;
         .codeForm

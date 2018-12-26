@@ -10,7 +10,36 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/checkEmail': {
+        target: 'http://192.168.0.104:8083/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/checkEmail': '/checkEmail'
+        }
+      },
+      '/checkTelephone': {
+        target: 'http://192.168.0.104:8083/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/checkTelephone': '/checkTelephone'
+        }
+      },
+      '/checkUsername': {
+        target: 'http://192.168.0.104:8083/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/checkUsername': '/checkUsername'
+        }
+      },
+      '/register': {
+        target: 'http://192.168.0.104:8083/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/register': '/register'
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

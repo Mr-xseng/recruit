@@ -7,7 +7,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/home'
+      component: () => import('client/home/home.vue')
     },
     {
       path: '/home',
@@ -20,6 +20,10 @@ export default new Router({
     {
       path: '/register',
       component: () => import('client/register/register.vue')
+    },
+    {
+      path: '/active',
+      component: () => import('client/active/active')
     },
     {
       path: '/detail/:id',

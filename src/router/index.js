@@ -32,6 +32,10 @@ export default new Router({
     {
       path: '/user',
       component: () => import('client/user/user')
+    },
+    {
+      path: '/activeCode',
+      component: () => import('client/activeCode/activeCode')
     }
   ]
 

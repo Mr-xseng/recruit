@@ -15,28 +15,42 @@ module.exports = {
         target: 'http://192.168.0.104:8083/',
         changeOrigin: true,
         pathRewrite: {
-          '^/checkEmail': '/checkEmail'
+          '^checkEmail': '/checkEmail'
         }
       },
       '/checkTelephone': {
         target: 'http://192.168.0.104:8083/',
         changeOrigin: true,
         pathRewrite: {
-          '^/checkTelephone': '/checkTelephone'
+          '^checkTelephone': '/checkTelephone'
         }
       },
       '/checkUsername': {
         target: 'http://192.168.0.104:8083/',
         changeOrigin: true,
         pathRewrite: {
-          '^/checkUsername': '/checkUsername'
+          '^checkUsername': '/checkUsername'
+        }
+      },
+      '/active': {
+        target: 'http://192.168.0.104:8083/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^active': '/active'
         }
       },
       '/register': {
         target: 'http://192.168.0.104:8083/',
         changeOrigin: true,
         pathRewrite: {
-          '^/register': '/register'
+          '^register': '/register'
+        }
+      },
+      '/login': {
+        target: 'http://192.168.0.104:8083/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^login': '/login'
         }
       }
     },
@@ -103,3 +117,4 @@ module.exports = {
     bundleAnalyzerReport: process.env.npm_config_report
   }
 }
+

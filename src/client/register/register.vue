@@ -90,6 +90,8 @@ export default {
         })
         if (status1 === 200 && status === 200) {
           callback()
+        } else {
+          callback(new Error('昵称已被使用'))
         }
       }
     }
@@ -131,6 +133,8 @@ export default {
           })
           if (status1 === 200 && status === 200) {
             callback()
+          } else {
+            callback(new Error('此手机号已被注册'))
           }
         } else {
           return callback(new Error('请输入正确的手机号'))
@@ -155,6 +159,8 @@ export default {
         })
         if (status1 === 200 && status === 200) {
           callback()
+        } else {
+          callback(new Error('此邮箱已被注册'))
         }
       } else {
         callback(new Error('邮箱格式有误'))
@@ -227,8 +233,10 @@ export default {
             data: params
           })
           if (status1 === 200 && status === 200) {
-            self.$router.push('/active')
+            self.$router.push('/activeCode')
           }
+        } else {
+          alert('注册失败!')
         }
       })
     },

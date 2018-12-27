@@ -40,8 +40,9 @@
             type="password" />
         </el-form-item>
         <el-form-item class="registerBtn">
+          <el-checkbox v-model="checked" class="autostyle">自动登录</el-checkbox>
           <button
-            @click="register()"
+            @click="login"
             class="registerName"
           >登录</button>
           <div class="error">{{ error }}</div>
@@ -62,9 +63,9 @@ export default {
       if (/@/.test(value)) {
         this.loginType = 'email'
       } else if (/^[0-9]{11}$/.test(value)) {
-        this.loginType = 'phone'
+        this.loginType = 'telephone'
       } else {
-        this.loginType = 'name'
+        this.loginType = 'username'
       }
       if (/\s+/g.test(value)) {
         callback(new Error('禁用空格字符'))
@@ -90,6 +91,8 @@ export default {
     return {
       error: '',
       loginType: '',
+      autoLogin: '0',
+      checked: false,
       ruleForm: {
         name: '',
         code: '',
@@ -118,11 +121,28 @@ export default {
     this.createCode()
   },
   methods: {
-    register () {
+    login () {
       let self = this
-      this.$refs['registerForm'].validate((valid) => {
+      this.$refs['registerForm'].validate(async (valid) => {
+        var params = new URLSearchParams()
+        if (self.checked) {
+          this.autoLogin = '1'
+        } else {
+          this.autoLogin = '0'
+        }
         if (valid) {
-          alert(self.loginType)
+          params.append('username', this.ruleForm.name)
+          params.append('password', this.ruleForm.pwd)
+          params.append('UserType', this.loginType)
+          params.append('autoLogin', this.autoLogin)
+          let {status: status1, data: {status, data}} = await self.$axios({
+            method: 'post',
+            data: params,
+            url: '/login'
+          })
+          if (status1 === 200 && status === 200) {
+            console.log(data)
+          }
         }
       })
     },
@@ -163,9 +183,9 @@ export default {
       border-radius 8px;
       box-shadow :1px 2px 20px rgba(0,0,0,.3);
       .register-info
-        text-align center
         font-size:13px;
         color: #b8d3ff;
+        text-align center;
         .register-login
           margin-top 10px;
           .loginSty
@@ -198,11 +218,15 @@ export default {
             top:0;
             right:-100px;
         .registerBtn
+          .autostyle
+            display block;
+            width:30%;
+            margin-top -15px;
+            color:#5dd5c8;
           .registerName
             width:100%;
             font-size:16px;
             line-height 42px;
-            text-align center;
             cursor:pointer;
             background:#5dd5c8;
             border:none;

@@ -143,7 +143,7 @@ export default {
     }
     var emailPass = async (rule, value, callback) => {
       const emailReg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/
-      const comReg = /163|qq/
+      const comReg = /163|qq|126/
       if (comReg.test(value)) {
         if (!/.com$/.test(value)) {
           callback(new Error('邮箱格式有误'))

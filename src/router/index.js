@@ -36,6 +36,10 @@ export default new Router({
     {
       path: '/activeCode',
       component: () => import('client/activeCode/activeCode')
+    },
+    {
+      path: '/search',
+      component: () => import('client/search/search')
     }
   ]
 

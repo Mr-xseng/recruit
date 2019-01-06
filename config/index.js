@@ -4,6 +4,8 @@
 
 const path = require('path')
 
+const ipConfig = '192.162.8.163'
+
 module.exports = {
   dev: {
 
@@ -12,42 +14,42 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/checkEmail': {
-        target: 'http://192.168.0.104:8083/',
+        target: `http://${ipConfig}:8083/`,
         changeOrigin: true,
         pathRewrite: {
           '^checkEmail': '/checkEmail'
         }
       },
       '/checkTelephone': {
-        target: 'http://192.168.0.104:8083/',
+        target: `http://${ipConfig}:8083/`,
         changeOrigin: true,
         pathRewrite: {
           '^checkTelephone': '/checkTelephone'
         }
       },
       '/checkUsername': {
-        target: 'http://192.168.0.104:8083/',
+        target: `http://${ipConfig}:8083/`,
         changeOrigin: true,
         pathRewrite: {
           '^checkUsername': '/checkUsername'
         }
       },
       '/active': {
-        target: 'http://192.168.0.104:8083/',
+        target: `http://${ipConfig}:8083/`,
         changeOrigin: true,
         pathRewrite: {
           '^active': '/active'
         }
       },
       '/register': {
-        target: 'http://192.168.0.104:8083/',
+        target: `http://${ipConfig}:8083/`,
         changeOrigin: true,
         pathRewrite: {
           '^register': '/register'
         }
       },
       '/login': {
-        target: 'http://192.168.0.104:8083/',
+        target: `http://${ipConfig}:8083/`,
         changeOrigin: true,
         pathRewrite: {
           '^login': '/login'

@@ -9,6 +9,7 @@ import 'assets/style/globalCSS/reset.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'assets/style/fonticon/iconfont.css'
+import 'assets/style/fonticon/icont/iconfont.css'
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 Vue.prototype.$axios = axios

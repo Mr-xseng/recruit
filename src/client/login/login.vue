@@ -1,5 +1,9 @@
 <template>
   <div class="register">
+    <router-link tag="div" to="/" class="titleBorder">
+      <div class="homeTitle">就业咨询</div>
+      <em>大学生的找<br/>工作平台</em>
+    </router-link>
     <div class="section">
       <div class="title">欢迎登录</div>
       <el-form
@@ -173,11 +177,35 @@ export default {
     background-color #5dd5c8;
     width:100%;
     height: 100%;
+    .titleBorder
+      cursor pointer;
+      em
+        color:#fff;
+        font-size: 18px;
+        position:relative;
+        top:-57px;
+        left: 130px;
+        line-height:24px;
+      .homeTitle
+        width: 60px;
+        height:60px;
+        margin-top: 50px;
+        margin-left: 50px;
+        border: 1px solid #5dd5c8;
+        border-radius: 8px;
+        color: #5dd5c8;
+        background: #fff;
+        line-height: 24px;
+        font-size: 19px;
+        padding: 5px;
+        text-align center;
+        box-sizing:border-box;
+        font-weight: 600;
     .section
-      width: 30%;
-      height:60%;
-      margin:120px auto;
+      width: 500px;
+      height:440px;
       padding-top:30px;
+      margin:-120px auto;
       box-sizing: border-box;
       background :#fff;
       border-radius 8px;

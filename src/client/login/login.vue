@@ -202,10 +202,17 @@ export default {
         box-sizing:border-box;
         font-weight: 600;
     .section
-      width: 500px;
-      height:440px;
+      position:absolute;
+      top:0;
+      bottom:0;
+      left: 0;
+      right:0;
+      margin:auto;
+      min-width: 436px;
+      min-height:403px;
+      width: 23%;
+      height:25%;
       padding-top:30px;
-      margin:-120px auto;
       box-sizing: border-box;
       background :#fff;
       border-radius 8px;

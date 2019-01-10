@@ -40,6 +40,10 @@ export default new Router({
     {
       path: '/search',
       component: () => import('client/search/search')
+    },
+    {
+      path: '/changeCity',
+      component: () => import('client/changeCity/changeCity')
     }
   ]
 

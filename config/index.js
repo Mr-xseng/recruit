@@ -54,7 +54,7 @@ module.exports = {
         pathRewrite: {
           '^login': '/login'
         }
-      }
+      },
     },
 
     // Various Dev Server settings

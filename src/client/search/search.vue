@@ -1,86 +1,90 @@
 <template>
-  <div class="page-search">
-    <div class="page-search-title">
-      <span>共找到<em>{{allJobNumber}}</em>个符合条件的职位</span>
-    </div>
-    <div class="pagination">
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :total="1000">
-      </el-pagination>
-    </div>
-    <ul>
-      <li
-        class="search-item"
-        v-for="(item, index) in jobData"
-        :key="item.id"
-      >
-        <div class="detailIcon" @click.stop="openIcon(index)">
-          <span class="detailTitle">{{item.openName}}</span>
-          <i :class="item.openClass" class="iconBottom"></i>
-        </div>
-        <template v-if="!item.openFlag">
-          <div class="item-left">
+  <div>
+    <homeHeader />
+    <div class="page-search">
+      <div class="page-search-title">
+        <span>共找到<em>{{allJobNumber}}</em>个符合条件的职位</span>
+      </div>
+      <div class="pagination">
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :total="1000">
+        </el-pagination>
+      </div>
+      <ul>
+        <li
+          class="search-item"
+          v-for="(item, index) in jobData"
+          :key="item.id"
+        >
+          <div class="detailIcon" @click.stop="openIcon(index)">
+            <span class="detailTitle">{{item.openName}}</span>
+            <i :class="item.openClass" class="iconBottom"></i>
+          </div>
+          <template v-if="!item.openFlag">
+            <div class="item-left">
+              <div class="item-title">
+                <div class="item-content">
+                  <div class="item-name">{{item.jobName}}</div>
+                </div>
+                <span class="item-icon">校园招聘</span>
+              </div>
+              <p class="item-info">
+            <span>
+              <i class="iconfont ">&#xe609;</i>
+              <span class="iconName">城市:<em>{{item.jobCity}}</em></span>
+            </span>
+                <span class="iconPer">
+              <i class="iconfont">&#xe623;</i>
+              <span class="iconName" style="margin-left: 2px;">人数:<em>{{item.jobNumber}}</em></span>
+            </span>
+                <span class="iconTime">
+              <i class="iconfont">&#xe61c;</i>
+              <span class="iconName" style="margin-left: 2px;">发布时间:<em>{{item.jobTime}}</em></span>
+            </span>
+              </p>
+            </div>
+            <div class="item-right">
+              <p class="conpanyName"><span>{{item.companyName}}</span></p>
+              <p class="conpanyJayor">{{item.professionName}}</p>
+            </div>
+          </template>
+          <template v-else>
             <div class="item-title">
               <div class="item-content">
                 <div class="item-name">{{item.jobName}}</div>
               </div>
               <span class="item-icon">校园招聘</span>
             </div>
+            <p class="detailName"><span>{{item.companyName}}</span></p>
             <p class="item-info">
             <span>
               <i class="iconfont ">&#xe609;</i>
               <span class="iconName">城市:<em>{{item.jobCity}}</em></span>
             </span>
-              <span class="iconPer">
-              <i class="iconfont">&#xe623;</i>
-              <span class="iconName" style="margin-left: 2px;">人数:<em>{{item.jobNumber}}</em></span>
-            </span>
-              <span class="iconTime">
-              <i class="iconfont">&#xe61c;</i>
-              <span class="iconName" style="margin-left: 2px;">发布时间:<em>{{item.jobTime}}</em></span>
-            </span>
-            </p>
-          </div>
-          <div class="item-right">
-            <p class="conpanyName"><span>{{item.companyName}}</span></p>
-            <p class="conpanyJayor">{{item.professionName}}</p>
-          </div>
-        </template>
-        <template v-else>
-          <div class="item-title">
-            <div class="item-content">
-              <div class="item-name">{{item.jobName}}</div>
-            </div>
-            <span class="item-icon">校园招聘</span>
-          </div>
-          <p class="detailName"><span>{{item.companyName}}</span></p>
-          <p class="item-info">
-            <span>
-              <i class="iconfont ">&#xe609;</i>
-              <span class="iconName">城市:<em>{{item.jobCity}}</em></span>
-            </span>
-            <span class="iconTime" style="display: inline;margin-left: 25px;">
+              <span class="iconTime" style="display: inline;margin-left: 25px;">
               <i class="iconfont">&#xe61c;</i>
               <span class="iconName" style="margin-left:2px;">发布时间:<em>{{item.jobTime}}</em></span>
             </span>
-          </p>
-          <p class="CompanyInfodetailed">
-            <span>公司类型:<em>{{item.companyType}}</em></span>
-            <span>公司规模:<em>{{item.companySize}}</em></span>
-            <span>所属行业:<em>{{item.professionName}}</em></span>
-            <span>职位类别:<em>{{item.jobCategory}}</em></span>
-            <span>招聘人数:<em>{{item.jobNumber}}</em></span>
-          </p>
-          <p class="jobDecrile">{{item.jobDescription}}</p>
-          <p class="detailMore">查看更多<i class="el-icon-d-arrow-right"></i></p>
-        </template>
-      </li>
-    </ul>
+            </p>
+            <p class="CompanyInfodetailed">
+              <span>公司类型:<em>{{item.companyType}}</em></span>
+              <span>公司规模:<em>{{item.companySize}}</em></span>
+              <span>所属行业:<em>{{item.professionName}}</em></span>
+              <span>职位类别:<em>{{item.jobCategory}}</em></span>
+              <span>招聘人数:<em>{{item.jobNumber}}</em></span>
+            </p>
+            <p class="jobDecrile">{{item.jobDescription}}</p>
+            <p class="detailMore">查看更多<i class="el-icon-d-arrow-right"></i></p>
+          </template>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>
+import Header from 'client/public/header/header.vue'
 export default {
   data () {
     return {
@@ -193,6 +197,9 @@ export default {
       }]
     }
   },
+  components: {
+    'homeHeader': Header
+  },
   methods: {
     openIcon (index) {
       this.jobData[index].openFlag = !this.jobData[index].openFlag
@@ -252,7 +259,6 @@ export default {
     -webkit-box-orient;
     text-overflow: ellipsis;
     overflow : hidden;
-    text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -290,7 +296,6 @@ export default {
     width:788px;
     margin 30px auto;
     position relative;
-    margin-bottom 200px;
     .page-search-title
       padding-left:10px;
       line-height: 38px;

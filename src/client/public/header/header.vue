@@ -12,6 +12,10 @@
         <div class="right">
           <router-link class="sign-in" to="/login" tag="div">登录</router-link>
           <router-link class="register" to="register" tag="div">注册</router-link>
+          <div class="city">
+            <span class="newCity"><i class="el-icon-location"></i>广州</span>
+            <router-link tag="span" class="changeCity" to="changeCity">切换城市</router-link>
+          </div>
         </div>
       </div>
       <div class="search-warpper">
@@ -19,8 +23,8 @@
           <div class="select1" @click="changeselect">
             <span>{{title1}}</span>
             <div class="icon">
-              <i class="iconfont" v-show="!selectShow">&#xe63b;</i>
-              <i class="iconfont" v-show="selectShow">&#xe63a;</i>
+              <i class="el-icon-arrow-down" v-show="!selectShow"></i>
+              <i class="el-icon-arrow-up" v-show="selectShow"></i>
             </div>
           </div>
           <div class="select2" v-show="selectShow" @click="changetitle">
@@ -28,7 +32,7 @@
           </div>
           <input type="text" placeholder="请输入关键词：例如公司名、职位名">
           <div class="logo">
-            <i class="iconfont">&#xe678;</i>
+            <i class="el-icon-search"></i>
           </div>
         </div>
       </div>
@@ -110,6 +114,17 @@ export default {
           margin-right : 30px
           height : 46px
           font-size : 14px
+          .city
+            display inline-block;
+            color  #fff;
+            position:absolute;
+            top:28px;
+            right: 340px;
+            .changeCity
+              cursor pointer;
+              margin-left 5px;
+              &:hover
+                color:aqua;
           .sign-in
             margin-left: 15px
             float : left

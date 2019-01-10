@@ -296,13 +296,20 @@ export default {
         box-sizing:border-box;
         font-weight: 600;
     .section
-      width: 450px;
-      height:570px;
+      position:absolute;
+      top:0;
+      bottom:0;
+      left:0;
+      right:0;
+      margin:auto;
+      min-width: 420px;
+      min-height:570px;
+      width:25%;
+      height: 60%;
       padding-top:30px;
       box-sizing: border-box;
       background :#fff;
       border-radius 8px;
-      margin:-120px auto;
       box-shadow :1px 2px 20px rgba(0,0,0,.3);
       .register-info
         text-align center

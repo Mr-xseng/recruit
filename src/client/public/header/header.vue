@@ -13,7 +13,7 @@
           <router-link class="sign-in" to="/login" tag="div">登录</router-link>
           <router-link class="register" to="register" tag="div">注册</router-link>
           <div class="city">
-            <span class="newCity"><i class="el-icon-location"></i>广州</span>
+            <span class="newCity"><i class="el-icon-location"></i>{{city}}</span>
             <router-link tag="span" class="changeCity" to="changeCity">切换城市</router-link>
           </div>
         </div>
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
   data () {
     return {
@@ -48,6 +49,9 @@ export default {
       title1: '职位',
       title2: '公司'
     }
+  },
+  computed: {
+    ...mapGetters(['city'])
   },
   methods: {
     changeselect () {
@@ -119,7 +123,9 @@ export default {
             color  #fff;
             position:absolute;
             top:28px;
-            right: 340px;
+            right: 455px;
+            width: 260px;
+            text-align center;
             .changeCity
               cursor pointer;
               margin-left 5px;

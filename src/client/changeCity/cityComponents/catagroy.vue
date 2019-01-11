@@ -27,6 +27,7 @@
 <script>
 import axios from 'axios'
 import pyjs from 'js-pinyin'
+import {mapActions} from 'vuex'
 const sign = 'bb9afbba667fd0deb80ea7faea3f1c5f'
 export default {
   data () {
@@ -37,8 +38,10 @@ export default {
   },
   methods: {
     handleCity (city) {
-      console.log(city)
-    }
+      this.getPosition(city)
+      this.$router.push('/')
+    },
+    ...mapActions(['getPosition'])
   },
   async mounted () {
     let blocks = []

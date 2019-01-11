@@ -6,13 +6,13 @@
     <el-select
       v-model="pvalue"
       placeholder="省份"
-      @change="getProvince"
     >
       <el-option
         v-for="item in province"
         :key="item.value"
         :label="item.label"
-        :value="item.value"/>
+        :value="item.value"
+      />
     </el-select>
     <el-select
       v-model="cvalue"
@@ -41,6 +41,7 @@
 import axios from 'axios'
 import _ from 'lodash'
 import pyjs from 'js-pinyin'
+import {mapActions} from 'vuex'
 const sign = 'bb9afbba667fd0deb80ea7faea3f1c5f'
 export default {
   data () {
@@ -59,17 +60,20 @@ export default {
   watch: {
     pvalue: async function (newPvalue) {
       let self = this
-      console.log(newPvalue)
       let {status, data: {city}} = await axios.get(`http://cp-tools.cn/geo/province/${newPvalue}?sign=${sign}`)
       if (status === 200) {
         self.city = city.map(item => {
           return {
             value: item.id,
-            label: item.name
+            label: item.name === '市辖区' ? item.province : item.name
           }
         })
       }
       self.cvalue = ''
+    },
+    newCity (Ncity) {
+      this.getPosition(Ncity)
+      this.$router.push('/')
     }
   },
   mounted: async function () {
@@ -105,15 +109,11 @@ export default {
     }, 200),
     handleSelect: async function () {
       this.newCity = this.input
-      console.log(this.newCity)
     },
     selectCity (value) {
-      this.newCity = value === '市辖区' ? this.newProvince : value
-      console.log(this.newCity)
+      this.newCity = value
     },
-    getProvince (value) {
-      this.newProvince = value
-    }
+    ...mapActions(['getPosition'])
   }
 }
 </script>

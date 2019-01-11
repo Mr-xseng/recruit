@@ -4,8 +4,10 @@
       <dt>热门城市:</dt>
       <dd
         v-for="item in list"
-        :key="item.id">
-        {{ item.name === '市辖区' ? item.province: item.name }}
+        :key="item.pid"
+        @click=getHotCity(item.label)
+      >
+        {{item.label}}
       </dd>
     </dl>
   </div>
@@ -19,10 +21,22 @@ export default {
       list: []
     }
   },
+  methods: {
+    getHotCity (item) {
+      this.$store.dispatch('getPosition', item)
+      this.$router.push('/')
+    }
+  },
   async mounted () {
     let {status, data: {hots}} = await axios.get(`http://cp-tools.cn/geo/hotCity?sign=${sign}`)
+    let self = this
     if (status === 200) {
-      this.list = hots
+      self.list = hots.map(item => {
+        return {
+          label: item.name === '市辖区' ? item.province : item.name,
+          pid: item.id
+        }
+      })
     }
   }
 }
@@ -40,6 +54,7 @@ export default {
         margin: 0 20px;
         color: #666;
         line-height: 22px;
+        cursor: pointer;
       }
     }
   }

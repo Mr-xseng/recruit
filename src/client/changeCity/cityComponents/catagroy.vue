@@ -44,6 +44,7 @@ export default {
     ...mapActions(['getPosition'])
   },
   async mounted () {
+    this.$router.push('/changeCity')
     let blocks = []
     let self = this
     let {status, data: {city}} = await axios.get(`http://cp-tools.cn/geo/city?sign=${sign}`)

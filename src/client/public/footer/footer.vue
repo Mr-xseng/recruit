@@ -23,10 +23,10 @@
         </div>
         <div class="warpper-contact">
           <dl>
-            <dt>联系大学就业网</dt>
+            <dt>联系大学就业咨询网</dt>
             <dd>
-              <p>北京华品博睿网络技术有限公司</p>
-              <p>北京市朝阳区太阳宫中路8号冠捷大厦302</p>
+              <p>广东石油化工学院</p>
+              <p>广东省茂名市茂南区官渡街道139号</p>
               <p>
                 联系电话
                 <span>08415063310</span>
@@ -36,7 +36,7 @@
         </div>
         <div class="warpper-right">
           <dl>
-            <dt>大学就业网</dt>
+            <dt>大学就业咨询网</dt>
             <dd>
               <p>企业服务热线和举报投诉 </p>
               <p>
@@ -49,8 +49,8 @@
       </div>
     </div>
     <div class="warpper-bottom">
-      <span>Copyright © 2018 BOSS直聘</span>
-      <span>京ICP备14013441号-5</span>
+      <span>Copyright © 2018 就业咨询</span>
+      <span>粤ICP备14013441号-5</span>
       <a href="#">电子营业执照</a>
       <a href="#">京公网安备11010502032801 </a>
     </div>
@@ -63,14 +63,14 @@ export default {
   <style scoped lang="stylus" rel="stylesheet/stylus">
   .foot
     width : 100%
-    background : #fff
     position : relative
+    background #414a60;
     a
       display: block
       width: 100%
       font-size: 12px
       text-decoration: none
-      color: #8d92a1
+      color: #fff
       height: 24px
       line-height: 24px
     .foot-warpper
@@ -89,7 +89,7 @@ export default {
           display: block
           width: 100%
           font-size: 12px
-          color: #8d92a1
+          color: #fff
           height: 24px
           line-height: 24px
         .warpper-left
@@ -114,5 +114,5 @@ export default {
         font-size : 14px
         margin-right: 15px
       a
-        color: #414a60
+        color: #8d92a1
   </style>

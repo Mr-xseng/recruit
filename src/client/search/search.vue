@@ -81,10 +81,17 @@
         </li>
       </ul>
     </div>
+    <router-link tag="div" style="text-align: center;margin-top:90px;" to="/">
+      <img style="width:788px" src="http://static.zheyibu.com/student/images/background/profession-footer-in.jpg" alt="">
+    </router-link>
+    <div style="margin:80px auto 0 auto;">
+      <home-footer />
+    </div>
   </div>
 </template>
 <script>
 import Header from 'client/public/header/header.vue'
+import Footer from 'client/public/footer/footer.vue'
 export default {
   data () {
     return {
@@ -198,7 +205,8 @@ export default {
     }
   },
   components: {
-    'homeHeader': Header
+    'homeHeader': Header,
+    'homeFooter': Footer
   },
   methods: {
     openIcon (index) {

@@ -14,7 +14,7 @@
           <router-link class="register" to="register" tag="div">注册</router-link>
           <div class="city">
             <span class="newCity"><i class="el-icon-location"></i>{{city}}</span>
-            <router-link tag="span" class="changeCity" to="changeCity">切换城市</router-link>
+            <router-link tag="span" class="changeCity" to="/changeCity">切换城市</router-link>
           </div>
         </div>
       </div>
@@ -30,8 +30,12 @@
           <div class="select2" v-show="selectShow" @click="changetitle">
             <span>{{title2}}</span>
           </div>
-          <input type="text" placeholder="请输入关键词：例如公司名、职位名">
-          <div class="logo">
+          <input
+            type="text"
+            placeholder="请输入关键词：例如公司名、职位名"
+            v-model="searchContent"
+            @keyup.enter="search(searchContent)">
+          <div class="logo" @click="search(searchContent)">
             <i class="el-icon-search"></i>
           </div>
         </div>
@@ -47,7 +51,8 @@ export default {
     return {
       selectShow: false,
       title1: '职位',
-      title2: '公司'
+      title2: '公司',
+      searchContent: ''
     }
   },
   computed: {
@@ -63,6 +68,18 @@ export default {
       this.title1 = this.title2
       this.title2 = them
       this.changeselect()
+    },
+    search (text) {
+      if (!text) {
+        this.$router.push(`/${this.$route.fullPath}`)
+      }
+      const status = Math.random().toString(16).replace('.', '').slice(0, 6).toUpperCase()
+      this.$router.push({
+        path: `/search/${status}`,
+        query: {
+          keyword: text
+        }
+      })
     }
   }
 }
@@ -73,6 +90,8 @@ export default {
     position: relative
     width : 100%
     background: #414a60
+    padding:0;
+    margin:0;
     .header-warpper
       width : 960px
       margin :0 auto
@@ -122,10 +141,10 @@ export default {
             display inline-block;
             color  #fff;
             position:absolute;
-            top:28px;
-            right: 455px;
-            width: 260px;
+            width: 240px;
             text-align center;
+            margin-left:8%;
+            top:20%;
             .changeCity
               cursor pointer;
               margin-left 5px;

@@ -20,6 +20,13 @@ export default {
     iSelect,
     Hot,
     Categroy
+  },
+  mounted () {
+    if (this.$router.fullPath.indexOf('city-')) {
+      this.$router.push({
+        path: '/changeCity'
+      })
+    }
   }
 }
 </script>

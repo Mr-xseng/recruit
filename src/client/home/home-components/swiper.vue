@@ -1,9 +1,13 @@
 <template>
-  <el-carousel :interval="4000" type="card" class="card" height="200px">
-    <el-carousel-item v-for="(item, index) in swiperImg" :key= index>
-      <img :src="item"/>
-    </el-carousel-item>
-  </el-carousel>
+  <div class="card">
+    <div class="block">
+      <el-carousel trigger="click" height="274px">
+        <el-carousel-item v-for="(item, index) in swiperImg" :key="index">
+          <img :src="item"/>
+        </el-carousel-item>
+      </el-carousel>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -25,5 +29,6 @@ export default {
 
 <style scoped lang="stylus">
   .card
-    margin-top 20px;
+    margin: 10px auto
+    width:70%;
 </style>

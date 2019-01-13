@@ -8,6 +8,9 @@
     <detail></detail>
     <!-- 公司   -->
     <company></company>
+    <router-link tag="div" to="/" style="text-align: center;margin-bottom:20px;cursor: pointer">
+      <img style="width:76.8%;" src="http://static.zheyibu.com/student/images/background/take_a_look.jpg?u=e99883fc-10f7-49dc-ae98-06f1ba3f421e" alt="">
+    </router-link>
     <home-footer></home-footer>
 </div>
 </template>
